@@ -8,4 +8,10 @@
 
 + 边缘检测：梯度处理、轮廓检测
 
-+ 形态学技术：腐蚀膨胀、Top-Hat
++ 形态学技术：腐蚀cardGradHat
+
+![image](https://github.com/Ayonveig/pycv-training/blob/main/resImgs/tmpRect.png)
+
+![image](https://github.com/Ayonveig/pycv-training/blob/main/resImgs/cardGrad.png)
+
+![image](https://github.com/Ayonveig/pycv-training/blob/main/resImgs/result.png)
