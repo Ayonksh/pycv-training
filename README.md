@@ -12,6 +12,8 @@
 
 + 形态学技术：腐蚀膨胀、开闭运算、Top-Hat
 
++ 特征分析：特征检测、特征匹配
+
 ![image](https://github.com/Ayonveig/pycv-training/blob/main/1.template_match/resImgs/tmpRect.png)
 
 ![image](https://github.com/Ayonveig/pycv-training/blob/main/1.template_match/resImgs/cardGrad.png)
@@ -19,3 +21,5 @@
 ![image](https://github.com/Ayonveig/pycv-training/blob/main/1.template_match/resImgs/result.png)
 
 ![image](https://github.com/Ayonveig/pycv-training/blob/main/2.image_warp/resImgs/result.png)
+
+![image](https://github.com/Ayonveig/pycv-training/blob/main/3.image_stitch/resImgs/keypointmatcher.png)
