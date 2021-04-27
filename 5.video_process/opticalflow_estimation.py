@@ -22,6 +22,9 @@ mask = np.zeros_like(preFrame)
 
 while True:
     ret, curFrame = vc.read()
+    if curFrame is None:
+        break
+
     curGray = cv2.cvtColor(curFrame, cv2.COLOR_BGR2GRAY)
 
     p1, status, error = cv2.calcOpticalFlowPyrLK(preGray, curGray, p0, None, **lkParams)
@@ -45,5 +48,6 @@ while True:
     # 更新每一帧
     preGray = curGray.copy()
     p0 = goodNew.reshape(-1, 1, 2)
+
 cv2.destroyAllWindows()
 vc.release()

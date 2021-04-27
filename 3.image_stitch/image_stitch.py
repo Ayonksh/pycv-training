@@ -45,7 +45,7 @@ for m in rawMatches:
         # 存储两个点在featuresA, featuresB中的索引值
         goodMatches.append((m[0].trainIdx, m[0].queryIdx))
 
-# 当筛选后的匹配对大于4时，计算视角变换矩阵
+# 当筛选后的匹配对大于4时，才去计算视角变换矩阵
 if len(goodMatches) > 4:
     # 获取匹配对的点坐标
     ptsA = np.float32([kpsA[i] for (_, i) in goodMatches])

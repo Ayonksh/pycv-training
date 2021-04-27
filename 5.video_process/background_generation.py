@@ -11,6 +11,9 @@ kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
 
 while True:
     ret, frame = vc.read()
+    if frame is None:
+        break
+
     fgmask = fgbg.apply(frame)
     # 形态学开运算去噪点
     fgmask = cv2.morphologyEx(fgmask, cv2.MORPH_OPEN, kernel)
@@ -28,5 +31,6 @@ while True:
     cv2.imshow('fgmask', fgmask)
     if cv2.waitKey(10) & 0xFF ==27:
         break
+
 vc.release()
 cv2.destroyAllWindows()

@@ -13,6 +13,7 @@ def sortContours(cnts, method = "left-to-right"):
         i = 1
     boundingBoxes = [cv2.boundingRect(c) for c in cnts]
     (cnts, boundingBoxes) = zip(*sorted(zip(cnts, boundingBoxes), key=lambda x: x[1][i]))  # x[1][i]表示zip打包的元组第1个元素的第i轴
+    
     return cnts, boundingBoxes
 
 # 读取一个模板图像
