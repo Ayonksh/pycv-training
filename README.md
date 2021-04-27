@@ -14,7 +14,7 @@
 
 + 特征分析：尺度空间、特征检测、特征匹配
 
-+ 视频处理：背景建模、光流估计
++ 视频处理：背景建模、光流估计、目标跟踪
 
 ![image](https://github.com/Ayonveig/pycv-training/blob/main/1.template_match/resImgs/tmpRect.png)
 
