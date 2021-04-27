@@ -6,7 +6,7 @@ def cv_show(name, img):
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
-def resize(image, width = None, height = None, inter = cv2.INTER_AREA):
+def resizeImg(image, width = None, height = None, inter = cv2.INTER_AREA):
     dim = None
     (h, w) = image.shape[:2]
     if width is None and height is None:
@@ -20,7 +20,7 @@ def resize(image, width = None, height = None, inter = cv2.INTER_AREA):
     resized = cv2.resize(image, dim, interpolation = inter)
     return resized
 
-def get_vertices(box):
+def getVertices(box):
     rect = np.zeros((4, 2), dtype = "float32")
 
     # 按顺序找到对应坐标0123分别是 左上，右上，右下，左下
@@ -28,7 +28,7 @@ def get_vertices(box):
     rect[0] = box[np.argmin(s)]
     rect[2] = box[np.argmax(s)]
 
-    d = np.diff(box, axis = 1) # 按照y轴计算差，也就是计算坐标x和y的差
+    d = np.diff(box, axis = 1)  # 按照y轴计算差，也就是计算坐标x和y的差
     rect[1] = box[np.argmin(d)]
     rect[3] = box[np.argmax(d)]
 
@@ -36,7 +36,7 @@ def get_vertices(box):
 
 docImg = cv2.imread('./oriImgs/page.jpg')
 ratio = docImg.shape[0] / 500.0
-docImg = resize(docImg, height = 500)
+docImg = resizeImg(docImg, height = 500)
 cv_show('docImg', docImg)
 
 docGray = cv2.cvtColor(docImg, cv2.COLOR_BGR2GRAY)
@@ -48,10 +48,10 @@ cv_show('docBlur', docBlur)
 docEdge = cv2.Canny(docBlur, 75, 200)
 cv_show('docEdge', docEdge)
 
-cnts = cv2.findContours(docEdge.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)[0]
-cnts = sorted(cnts, key = cv2.contourArea, reverse = True)[:5]
+docCnts = cv2.findContours(docEdge.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)[0]
+docCnts = sorted(docCnts, key = cv2.contourArea, reverse = True)[:5]
 
-for c in cnts:
+for c in docCnts:
     # 计算轮廓周长
     peri = cv2.arcLength(c, True)
     # epsilon = 0.02 * peri，表示轮廓近似阈值
@@ -60,15 +60,15 @@ for c in cnts:
 
     # 4个点的时候就拿出来
     if len(approx) == 4:
-        screenCnt = approx
+        screenCnts = approx
         break
 
 docOtl = docImg.copy()
-cv2.drawContours(docOtl, [screenCnt], -1, (0, 255, 0), 2)
+cv2.drawContours(docOtl, [screenCnts], -1, (0, 255, 0), 2)
 cv_show('docOtl', docOtl)
 
-screenCnt = screenCnt.reshape(4, 2)  # 轮廓坐标点其实也是按照左上、右上、右下和左下的顺序
-rect = get_vertices(screenCnt)  #得到轮廓顶点
+screenCnts = screenCnts.reshape(4, 2)  # 轮廓坐标点其实也是按照左上、右上、右下和左下的顺序
+rect = getVertices(screenCnts)  # 得到轮廓顶点
 
 # 计算输入的w和h值
 (tl, tr, br, bl) = rect

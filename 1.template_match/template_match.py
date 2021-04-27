@@ -6,17 +6,21 @@ def cv_show(name, img):
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
-def sort_contours(cnts):
+def sortContours(cnts, method = "left-to-right"):
+    if method == "left-to-right":
+        i = 0
+    elif method == "top-to-bottom":
+        i = 1
     boundingBoxes = [cv2.boundingRect(c) for c in cnts]
-    (cnts, boundingBoxes) = zip(*sorted(zip(cnts, boundingBoxes), key=lambda x: x[1][0]))
+    (cnts, boundingBoxes) = zip(*sorted(zip(cnts, boundingBoxes), key=lambda x: x[1][i]))  # x[1][i]表示zip打包的元组第1个元素的第i轴
     return cnts, boundingBoxes
 
 # 读取一个模板图像
-tmp = cv2.imread('./oriImgs/template.png')
-cv_show('tmp', tmp)
+tmpImg = cv2.imread('./oriImgs/template.png')
+cv_show('tmpImg', tmpImg)
 
 # 灰度图
-tmpGray = cv2.cvtColor(tmp, cv2.COLOR_BGR2GRAY)
+tmpGray = cv2.cvtColor(tmpImg, cv2.COLOR_BGR2GRAY)
 cv_show('tmpGray', tmpGray)
 
 # 二值图像
@@ -25,21 +29,21 @@ cv_show('tmpBin', tmpBin)
 
 # 计算轮廓
 #cv2.findContours()函数接受的参数为二值图，即黑白的（不是灰度图）,cv2.RETR_EXTERNAL只检测外轮廓，cv2.CHAIN_APPROX_SIMPLE只保留终点坐标
-tmpContours = cv2.findContours(tmpBin, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[0]
+tmpCnts = cv2.findContours(tmpBin, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[0]
 
 # 画出轮廓
-cv2.drawContours(tmp, tmpContours, -1, (0, 0, 255), 3)
-cv_show('tmpCnts', tmp)
+cv2.drawContours(tmpImg, tmpCnts, -1, (0, 0, 255), 3)
+cv_show('tmpCnts', tmpImg)
 
 # 轮廓排序
-tmpContours = sort_contours(tmpContours)[0]
+tmpCnts = sortContours(tmpCnts)[0]
 
 # 遍历每个轮廓
 digits = {}
-for (i, c) in enumerate(tmpContours):
+for (i, c) in enumerate(tmpCnts):
     (x, y, w, h) = cv2.boundingRect(c)
-    cv2.rectangle(tmp, (x, y), (x + w, y + h), (255, 0, 0), 3)
-    cv_show('tmpRect', tmp)
+    cv2.rectangle(tmpImg, (x, y), (x + w, y + h), (255, 0, 0), 3)
+    cv_show('tmpRect', tmpImg)
     roi = tmpBin[y:y + h, x: x + w]
     cv_show('roi', roi)
     roi = cv2.resize(roi, (55, 90))
@@ -51,9 +55,13 @@ cv_show('cardImg', cardImg)
 cardGray = cv2.cvtColor(cardImg, cv2.COLOR_BGR2GRAY)
 cv_show('cardGray', cardGray)
 
+# 中值滤波，去除一些无关的噪声
+cardBlur = cv2.medianBlur(cardGray, 5)
+cv_show('cardBlur', cardBlur)
+
 # 顶帽操作，突出更明亮的区域
 rectKernel = cv2.getStructuringElement(cv2.MORPH_RECT, (9, 5))
-cardTophat = cv2.morphologyEx(cardGray, cv2.MORPH_TOPHAT, rectKernel)
+cardTophat = cv2.morphologyEx(cardBlur, cv2.MORPH_TOPHAT, rectKernel)
 cv_show('cardTophat', cardTophat)
 
 # 图像梯度
@@ -85,18 +93,18 @@ gradDst = cv2.morphologyEx(gradDst, cv2.MORPH_CLOSE, elpKernel)
 cv_show('gradDist4', gradDst)
 
 # 画出轮廓
-gradDstContours = cv2.findContours(gradDst.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[0]
+gradDstCnts = cv2.findContours(gradDst.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[0]
 cardImgCnts = cardImg.copy()
-cv2.drawContours(cardImgCnts, gradDstContours, -1, (0, 0, 255), 3)
+cv2.drawContours(cardImgCnts, gradDstCnts, -1, (0, 0, 255), 3)
 cv_show('cardImgCnts', cardImgCnts)
 
 # 找出要操作的轮廓并排序
-gradDstContours = gradDstContours[5:10]  # 想要识别的卡号在第五个轮廓开始
-gradDstContours = sort_contours(gradDstContours)[0]
+gradDstCnts = gradDstCnts[5:10]  # 想要识别的卡号在第五个轮廓开始
+gradDstCnts = sortContours(gradDstCnts)[0]
 
 # 遍历每一个轮廓中的数字
 output = []
-for (i, c) in enumerate(gradDstContours):
+for (i, c) in enumerate(gradDstCnts):
     # 初始化每组中要存放的待识别出的数组
     groupOutput = []
     # 根据坐标提取每一个组
@@ -109,11 +117,11 @@ for (i, c) in enumerate(gradDstContours):
     cv_show('group1', group)
 
     # 计算每一组的轮廓并排序
-    digitContours = cv2.findContours(group.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[0]
-    digitContours = sort_contours(digitContours)[0]
+    digitCnts = cv2.findContours(group.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[0]
+    digitCnts = sortContours(digitCnts)[0]
     
     # 计算每一组中的每一个数值
-    for c in digitContours:
+    for c in digitCnts:
         (x, y, w, h) = cv2.boundingRect(c)
         roi = group[y: y + h, x: x + w]
         cv_show('roi',roi)

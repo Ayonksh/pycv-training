@@ -23,3 +23,5 @@
 ![image](https://github.com/Ayonveig/pycv-training/blob/main/2.image_warp/resImgs/result.png)
 
 ![image](https://github.com/Ayonveig/pycv-training/blob/main/3.image_stitch/resImgs/keypointmatcher.png)
+
+![image](https://github.com/Ayonveig/pycv-training/blob/main/4.sheet_evaluate/resImgs/grade.png)
