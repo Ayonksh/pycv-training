@@ -58,7 +58,7 @@ args = vars(ap.parse_args())
 layerNames = [
     "feature_fusion/Conv_7/Sigmoid",
     "feature_fusion/concat_3"
-    ]
+]
 
 net = cv2.dnn.readNet('./frozen_east_text_detection.pb')
 

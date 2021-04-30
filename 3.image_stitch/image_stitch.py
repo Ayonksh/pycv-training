@@ -51,7 +51,8 @@ if len(goodMatches) > 4:
     ptsA = np.float32([kpsA[i] for (_, i) in goodMatches])
     ptsB = np.float32([kpsB[i] for (i, _) in goodMatches])
 
-    # 计算视角变换矩阵，注意A，B坐标点的顺序
+    # 计算视角变换矩阵
+    # ！！！注意A，B坐标点的顺序！！！
     (H, status) = cv2.findHomography(ptsB, ptsA, cv2.RANSAC, 4.0)
 
     # 将图片B进行视角变换，res是变换后图片

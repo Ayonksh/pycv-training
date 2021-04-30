@@ -59,7 +59,7 @@ for c in docCnts:
     # True表示封闭的
     approx = cv2.approxPolyDP(c, 0.02 * peri, True)
 
-    # 4个点的时候就拿出来
+    # 4个点的时候，说明是矩形，拿出来
     if len(approx) == 4:
         screenCnts = approx
         break

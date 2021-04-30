@@ -28,7 +28,7 @@ image = cv2.resize(image, (newW, newH))
 layerNames = [
     "feature_fusion/Conv_7/Sigmoid",
     "feature_fusion/concat_3"
-    ]
+]
 
 # 加载预训练EAST文本检测模型
 net = cv2.dnn.readNet('./frozen_east_text_detection.pb')

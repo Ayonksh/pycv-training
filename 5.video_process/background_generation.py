@@ -23,6 +23,7 @@ while True:
     # 筛选行人轮廓
     for c in moveCnts:
         perimeter = cv2.arcLength(c, True)
+        # 周长是根据实际任务指定的
         if perimeter > 180:
             x, y, w, h = cv2.boundingRect(c)
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
