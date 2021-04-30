@@ -16,6 +16,8 @@
 
 + 视频处理：背景建模、光流估计、目标跟踪
 
++ 深度学习：EAST文本检测
+
 ![image](https://github.com/Ayonveig/pycv-training/blob/main/1.template_match/resImgs/tmpRect.png)
 
 ![image](https://github.com/Ayonveig/pycv-training/blob/main/1.template_match/resImgs/cardGrad.png)
