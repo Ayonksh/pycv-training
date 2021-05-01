@@ -48,7 +48,7 @@ def decode_predictions(scores, geometry):
     return (rects, confidences)
 
 ap = argparse.ArgumentParser()
-ap.add_argument("-v", "--video", type = str, help="path to optinal input video file")
+ap.add_argument("-v", "--video", type = str, help = "path to optinal input video file")
 args = vars(ap.parse_args())
 
 (W, H) = (None, None)
@@ -94,7 +94,7 @@ while True:
     (scores, geometry) = net.forward(layerNames)
 
     (rects, confidences) = decode_predictions(scores, geometry)
-    boxes = non_max_suppression(np.array(rects), probs=confidences)
+    boxes = non_max_suppression(np.array(rects), probs = confidences)
 
     for (startX, startY, endX, endY) in boxes:
         startX = int(startX * rW)

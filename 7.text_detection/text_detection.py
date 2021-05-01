@@ -8,7 +8,7 @@ import argparse
 from imutils.object_detection import non_max_suppression
 
 ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--image", type = str, help="path to input image")
+ap.add_argument("-i", "--image", type = str, help = "path to input image")
 args = vars(ap.parse_args())
 
 image = cv2.imread(args["image"])

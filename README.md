@@ -1,6 +1,6 @@
 # 基于python的opencv基础训练
 
-通过几个小项目，新手能使用python快速学习opencv，囊括图像处理的常用基本操作
+通过几个小项目，新手能使用python快速学习openCV，囊括图像处理的常用基本操作
 
 + 灰度变换：阈值处理、直方图处理、距离变换
 
@@ -16,7 +16,7 @@
 
 + 视频处理：背景建模、光流估计、目标跟踪
 
-+ 深度学习：EAST文本检测
++ 深度学习：EAST文本检测和识别
 
 ![image](https://github.com/Ayonveig/pycv-training/blob/main/1.template_match/resImgs/tmpRect.png)
 
