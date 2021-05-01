@@ -1,6 +1,6 @@
-# 基于python的opencv基础训练
+# 基于Python的OpenCV基础训练
 
-通过几个小项目，新手能使用python快速学习openCV，囊括图像处理的常用基本操作
+通过几个小项目，新手能使用Python快速学习OpenCV，囊括图像处理的常用基本操作
 
 + 灰度变换：阈值处理、直方图处理、距离变换
 
@@ -28,4 +28,4 @@
 
 ![image](https://github.com/Ayonveig/pycv-training/blob/main/3.image_stitch/resImgs/keypointmatcher.png)
 
-![image](https://github.com/Ayonveig/pycv-training/blob/main/4.sheet_evaluate/resImgs/grade.png)
+![image](https://github.com/Ayonveig/pycv-training/blob/main/4.sheet_evaluation/resImgs/grade.png)
