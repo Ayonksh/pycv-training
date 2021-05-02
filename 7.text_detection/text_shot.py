@@ -1,8 +1,8 @@
 # 此项目在开源项目上进行开发
 # 原项目地址：https://github.com/ianzhao05/textshot
 
-# # USAGE
-# python text_shot.py [-s 1] [-p 0.05]
+# USAGE
+# python text_shot.py [-l eng+chi_sim] [-s 1] [-p 0.05]
 
 
 import io
@@ -25,6 +25,8 @@ except ImportError:
     pass
 
 ap = argparse.ArgumentParser()
+ap.add_argument("-l", "--language", type = str, default = "eng+chi_sim", 
+                help = "language to recognize")
 ap.add_argument("-s", "--scene", type = int, default = 0,
                 help = "scene to recognize image. 0 as standard scene; 1 as natural scene")
 ap.add_argument("-p", "--padding", type = float, default = 0.0, 
@@ -168,8 +170,8 @@ def preProcess(img):
 
         roi = ori[startY:endY, startX:endX]
 
-        config = ("-l eng+chi_sim --oem 1 --psm 7")
-        text = pytesseract.image_to_string(roi, config = config)
+        config = ("--oem 1 --psm 7")
+        text = pytesseract.image_to_string(roi, lang = args["language"], config = config)
 
         results.append(((startX, startY, endX, endY), text))
 
@@ -193,7 +195,7 @@ def processImage(img):
 
     try:
         if args["scene"] == 0:
-            texts = pytesseract.image_to_string(pil_img, lang = "eng+chi_sim")
+            texts = pytesseract.image_to_string(pil_img, lang = args["language"])
         elif args["scene"] == 1:
             texts = preProcess(cv_img)
     except RuntimeError as error:
