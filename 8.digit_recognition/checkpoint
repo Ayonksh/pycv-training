@@ -1,0 +1,2 @@
+model_checkpoint_path: "E:/MyPython/02MNIST_NN/mnist/minst_cnn_model.ckpt"
+all_model_checkpoint_paths: "E:/MyPython/02MNIST_NN/mnist/minst_cnn_model.ckpt"
