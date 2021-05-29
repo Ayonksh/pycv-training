@@ -1,0 +1,3 @@
+1.先运行encode_faces.py。对dataset中的图片进行encoding，生成encodings.pickle
+
+2.recognize_faces_image.py和recognize_faces_video.py都需要用到encodings.pickle
