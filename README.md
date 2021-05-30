@@ -16,16 +16,18 @@
 
 + 视频处理：背景建模、光流估计、目标跟踪
 
-+ 深度学习：EAST文本检测和识别、手写数字识别
++ 深度学习：人脸检测与识别、EAST文本检测和识别、手写数字识别
 
-![image](https://github.com/Ayonveig/pycv-training/blob/main/1.template_match/resImgs/tmpRect.png)
+![image](https://github.com/Ayonveig/pycv-training/blob/main/01.template_match/resImgs/result.png)
 
-![image](https://github.com/Ayonveig/pycv-training/blob/main/1.template_match/resImgs/cardGrad.png)
+![image](https://github.com/Ayonveig/pycv-training/blob/main/02.image_warp/resImgs/result.png)
 
-![image](https://github.com/Ayonveig/pycv-training/blob/main/1.template_match/resImgs/result.png)
+![image](https://github.com/Ayonveig/pycv-training/blob/main/03.image_stitch/resImgs/keypointmatcher.png)
 
-![image](https://github.com/Ayonveig/pycv-training/blob/main/2.image_warp/resImgs/result.png)
+![image](https://github.com/Ayonveig/pycv-training/blob/main/04.sheet_evaluation/resImgs/grade.png)
 
-![image](https://github.com/Ayonveig/pycv-training/blob/main/3.image_stitch/resImgs/keypointmatcher.png)
+![image](https://github.com/Ayonveig/pycv-training/blob/main/05.video_process/resImgs/background_generation.png)
 
-![image](https://github.com/Ayonveig/pycv-training/blob/main/4.sheet_evaluation/resImgs/grade.png)
+![image](https://github.com/Ayonveig/pycv-training/blob/main/07.face_recognition/resImgs/recognized.jpg)
+
+![image](https://github.com/Ayonveig/pycv-training/blob/main/09.text_recognition/resImgs/result.png)
